@@ -6,11 +6,12 @@ on:
     push:
         branches:
             - main
+            - develop
         tags:
             - "v*"
 
 env:
-    REGISTRY: quay.io
+    REGISTRY: ${{ vars.REGISTRY }}
     REPOSITORY: ${{ vars.REPOSITORY }}
     OPERATOR_IMAGE: ${{ vars.REGISTRY }}/${{ vars.REPOSITORY }}/automotive-dev-operator
     WEBUI_IMAGE: ${{ vars.REGISTRY }}/${{ vars.REPOSITORY }}/aib-webui
@@ -32,8 +33,8 @@ jobs:
               uses: docker/login-action@v3
               with:
                   registry: ${{ env.REGISTRY }}
-                  username: ${{ secrets.REGISTRY_USER }}
-                  password: ${{ secrets.REGISTRY_PASSWORD }}
+                  username: ${{ secrets.REGISTRY_USERNAME }}
+                  password: ${{ secrets.GH_TOKEN }}
 
             - name: Build and push operator (ARM64)
               uses: docker/build-push-action@v5
@@ -61,8 +62,8 @@ jobs:
               uses: docker/login-action@v3
               with:
                   registry: ${{ env.REGISTRY }}
-                  username: ${{ secrets.REGISTRY_USER }}
-                  password: ${{ secrets.REGISTRY_PASSWORD }}
+                  username: ${{ secrets.REGISTRY_USERNAME }}
+                  password: ${{ secrets.GH_TOKEN }}
 
             - name: Build and push operator (AMD64)
               uses: docker/build-push-action@v5
@@ -91,8 +92,8 @@ jobs:
               uses: docker/login-action@v3
               with:
                   registry: ${{ env.REGISTRY }}
-                  username: ${{ secrets.REGISTRY_USER }}
-                  password: ${{ secrets.REGISTRY_PASSWORD }}
+                  username: ${{ secrets.REGISTRY_USERNAME }}
+                  password: ${{ secrets.GH_TOKEN }}
 
             - name: Create and push multi-arch manifest
               run: |
@@ -116,8 +117,8 @@ jobs:
               uses: docker/login-action@v3
               with:
                   registry: ${{ env.REGISTRY }}
-                  username: ${{ secrets.REGISTRY_USER }}
-                  password: ${{ secrets.REGISTRY_PASSWORD }}
+                  username: ${{ secrets.REGISTRY_USERNAME }}
+                  password: ${{ secrets.GH_TOKEN }}
 
             - name: Build and push webui (ARM64)
               uses: docker/build-push-action@v5
@@ -145,8 +146,8 @@ jobs:
               uses: docker/login-action@v3
               with:
                   registry: ${{ env.REGISTRY }}
-                  username: ${{ secrets.REGISTRY_USER }}
-                  password: ${{ secrets.REGISTRY_PASSWORD }}
+                  username: ${{ secrets.REGISTRY_USERNAME }}
+                  password: ${{ secrets.GH_TOKEN }}
 
             - name: Build and push webui (AMD64)
               uses: docker/build-push-action@v5
@@ -175,8 +176,8 @@ jobs:
               uses: docker/login-action@v3
               with:
                   registry: ${{ env.REGISTRY }}
-                  username: ${{ secrets.REGISTRY_USER }}
-                  password: ${{ secrets.REGISTRY_PASSWORD }}
+                  username: ${{ secrets.REGISTRY_USERNAME }}
+                  password: ${{ secrets.GH_TOKEN }}
 
             - name: Create and push multi-arch manifest (webui)
               run: |
@@ -200,8 +201,8 @@ jobs:
               uses: docker/login-action@v3
               with:
                   registry: ${{ env.REGISTRY }}
-                  username: ${{ secrets.REGISTRY_USER }}
-                  password: ${{ secrets.REGISTRY_PASSWORD }}
+                  username: ${{ secrets.REGISTRY_USERNAME }}
+                  password: ${{ secrets.GH_TOKEN }}
 
             - name: Create tag aliases for operator and webui
               run: |
