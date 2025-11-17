@@ -22,7 +22,7 @@ env:
 jobs:
     build-operator-arm64:
         runs-on: ubuntu-24.04-arm
-        if: github.ref == 'refs/heads/main'
+        #if: github.ref == 'refs/heads/main'
         steps:
             - uses: actions/checkout@v4
 
@@ -51,7 +51,7 @@ jobs:
 
     build-operator-amd64:
         runs-on: ubuntu-latest
-        if: github.ref == 'refs/heads/main'
+        #if: github.ref == 'refs/heads/main'
         steps:
             - uses: actions/checkout@v4
 
@@ -81,7 +81,7 @@ jobs:
     create-multiarch-manifest:
         needs: [build-operator-arm64, build-operator-amd64]
         runs-on: ubuntu-latest
-        if: github.ref == 'refs/heads/main'
+        #if: github.ref == 'refs/heads/main'
         steps:
             - uses: actions/checkout@v4
 
@@ -106,7 +106,7 @@ jobs:
 
     build-webui-arm64:
         runs-on: ubuntu-24.04-arm
-        if: github.ref == 'refs/heads/main'
+        #if: github.ref == 'refs/heads/main'
         steps:
             - uses: actions/checkout@v4
 
@@ -135,7 +135,7 @@ jobs:
 
     build-webui-amd64:
         runs-on: ubuntu-latest
-        if: github.ref == 'refs/heads/main'
+        #if: github.ref == 'refs/heads/main'
         steps:
             - uses: actions/checkout@v4
 
